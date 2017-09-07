@@ -128,7 +128,8 @@ namespace UMA.Editors
 							if (DnaConverter != null)
 							{
 								DNAConvertersAdded = true;
-								_recipe.AddDNAUpdater(DnaConverter);
+								//the recipe already has the DNAConverter, it just doesn't have the values it requires to show the output in the DNA tab of the recipe
+								//_recipe.AddDNAUpdater(DnaConverter);
 								Type thisType = DnaConverter.DNAType;
 								if (DnaConverter is DynamicDNAConverterBehaviourBase)
 								{
@@ -276,7 +277,7 @@ namespace UMA.Editors
 			Type TargetType = target.GetType();
 			bool doUpdate = false;
 
-			if (TargetType.ToString() == "UMATextRecipe" /*|| TargetType.ToString() == "UMAWardrobeRecipe" || TargetType.ToString() == "UMADCSRecipe"*/)
+			if (TargetType.ToString() == "UMA.UMATextRecipe")
 			{
 				FieldInfo RecipeTypeField = TargetType.GetField("recipeType", BindingFlags.Public | BindingFlags.Instance);
 				//the Recipe Type field defines whether the extra wardrobe recipe fields show and whether we are overriding the SlotMasterEditor with WardrobeSetMasterEditor
