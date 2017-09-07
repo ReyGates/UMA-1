@@ -3067,7 +3067,11 @@ namespace UMA.CharacterSystem
 			// UpdateAfterDownload.UpdateSetSlots might have also caused downloads to happen so if it did do this again
 			if (requiredAssetsToCheck.Count > 0)
 			{
-				yield return StartCoroutine(UpdateAfterDownloads());
+				while (DynamicAssetLoader.Instance.downloadingAssetsContains(requiredAssetsToCheck))
+				{
+					yield return null;
+				}
+				UpdateAfterDownload();
 			}
 		}
 
